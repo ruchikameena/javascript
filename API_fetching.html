@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            display: flex;
+            flex-direction: column;
+        }
+        div{
+            width: 33%;
+            text-align: center;
+            border: 1px solid black;
+        }
+        .top{
+            width: 100%;
+            padding: 10px;
+        }
+        .container{
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        input{
+            width: 500px;
+            padding: 10px;
+        }
+        button{
+            padding: 10px;
+        }
+        #cart{
+            width: auto;
+            font-size: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="top">
+        <input type="text">
+        <button>search</button>
+        <button id="cart"><i class="fa-solid fa-cart-shopping"></i></button>
+    </div>
+    <div class="container" id="contain">
+        
+    </div>
+    
+    <script>
+        // function food(dish,order){
+        //     setTimeout(() =>{
+        //         console.log(dish);
+        //         if(order){
+        //             order();
+        //         }
+        //     },1000);
+        // }
+        // food("pizza",()=>{
+        //     food("burger",()=>{
+        //         food("drink",()=>{
+        //             food("salad")
+        //         })
+        //     })
+        // })
+
+        // for api fetching
+        // let prom = fetch('https://dummyjson.com/products')
+        // prom.then((response) => {
+        //     response.json().then((result)=>{
+        //         console.log(result.products)
+        //     })
+        // })
+
+        async function fetch_data(){
+            try{
+                let data = await fetch('https://dummyjson.com/products')
+                let json_data = await data.json()
+                let val =  await json_data.products
+                console.log(json_data.products)
+
+                let filter_product = val.filter((items)=>{
+                    return items.price<100;
+                })
+                    // let input = document.createElement('input');
+                    // let search = document.createElement('button');
+                    // let top =document.createElement('div');
+                    // search.innerText = "search"
+
+                    // top.append(input)
+                    // top.append(search)
+
+                document.body.append(top)
+
+                for (let i of filter_product){
+                    let div = document.createElement('div');
+                    let image = document.createElement('img');
+                    let title = document.createElement('h1');
+                    let price = document.createElement('h2');
+                    let description = document.createElement('p');
+                    let button = document.createElement('button');
+
+                    image.src = i.thumbnail;
+                    title.innerHTML = i.title;
+                    price.innerText = i.price;
+                    description.innerText = i.description;
+                    button.innerText = "add to cart"
+
+                    div.append(image)
+                    div.append(title)
+                    div.append(price)
+                    div.append(description)
+                    div.append(button)
+
+                    document.getElementById("contain").append(div)
+                }
+                console.log("kam pura hua")
+            }
+            catch{
+                console.log("data ki baat maat karo !")
+            }
+        }
+        fetch_data()
+    </script>
+</body>
+</html>
