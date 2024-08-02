@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>digital clock</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0d0d0d;
+            font-family: sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            width: 45%;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid #141414;
+            border-radius: 3px;
+        }
+
+        h1 {
+            margin-top: 3px;
+            font-size: 20px;
+            text-align: center;
+            padding: 10px 20px;
+            border-bottom: 2px solid #141414;
+            background: linear-gradient(90deg, rgb(0, 225, 255), rgb(236, 8, 149));
+        }
+
+        .box {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .clock {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 6px;
+            width: 30%;
+            height: 60px;
+            align-items: center;
+            text-align: center;
+            color: #fff;
+            background-color: #141414;
+            border-radius: 10px;
+            font-size: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .clock p {
+            font-size: 10px;
+        }
+
+        .clock::before,
+        .clock::after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgb(6, 107, 221), transparent);
+            animation: move 2s linear infinite;
+        }
+
+        .clock::before {
+            top: 0;
+            left: 0;
+            animation-delay: 0s;
+        }
+
+        .clock::after {
+            bottom: 0;
+            right: 0;
+            animation-delay: 1s;
+        }
+
+        @keyframes move {
+            0% {
+                transform: translateX(-100%);
+            }
+
+            100% {
+                transform: translateX(100%);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="day" id="day"></h1>
+        <div class="box">
+            <div class="clock">
+                <div class="front_clock">
+                    <div id="hour">00</div>
+                    <p>hour</p>
+                </div>
+            </div>
+
+            <div class="clock">
+                <div class="font_clock">
+                    <div id="minute">00</div>
+                    <p>minutes</p>
+                </div>
+            </div>
+
+            <div class="clock">
+                <div class="font_clock">
+                    <div id="second">00</div>
+                    <p>seconds</p>
+                </div>
+            </div>
+            <div class="clock">
+                <div class="font_clock">
+                    <div id="second">PM</div>
+                    <p>^_^</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        const hour = document.getElementById('hour');
+        const minute = document.getElementById('minute');
+        const second = document.getElementById('second');
+        const period = document.getElementById('period');
+        const day = document.getElementById('day');
+        var monthName = [
+            'January',
+            'February',
+            'March',
+            'April',
+            'May',
+            'June',
+            'July',
+            'August',
+            'September',
+            'October',
+            'November',
+            'December'
+        ]
+        const clock = setInterval(function time() {
+            let today = new Date()
+            let d = today.getDate()
+            let m = today.getMonth()
+            let y = today.getFullYear()
+            let h = today.getHours()
+            let min = today.getMinutes()
+            let sec = today.getSeconds()
+
+            const ampm = h >= 12 ? 'AM' : 'PM';
+            h = h % 12;
+            h = h ? h : 12;
+
+            day.innerHTML = `${d} ${monthName[m]} ${y}`
+            hour.textContent = h
+            minute.innerText = min
+            second.innerText = sec
+            period.textContent = ampm;
+
+
+        })
+    </script>
+</body>
+
+</html>
