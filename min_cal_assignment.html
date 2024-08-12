@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>min_calculator</title>
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        p{
+            background-color: #000;
+            padding: 10px 0;
+        }
+        input {
+            width: 30%;
+            padding: 10px;
+            margin: 10px;
+            font-size: 15px;
+            background-color: rgba(245, 244, 244, 0.726);
+            color: #000;
+            outline: none;
+            border: none;
+            text-align: center;
+            box-shadow: 4px 4px 8px rgb(136, 135, 135);
+        }
+        #operation {
+            width: 30%;
+            padding: 10px;
+            font-size: 15px;
+            background-color: rgba(245, 244, 244, 0.726);
+            color: #000;
+            border: none;
+            box-shadow: 4px 4px 8px rgb(136, 135, 135);
+            text-align: center;
+            margin-top: 10px;
+        }
+        .contain{
+            width: 50%;
+            background: linear-gradient(45deg,rgb(41, 40, 40),rgba(32, 32, 32, 0.692));
+            box-shadow: 4px 4px 8px rgb(136, 135, 135);
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="contain">
+        <h1>Min Calculator</h1>
+        <p>using only basic javascript html and css</p>
+        <div class="top">
+            <label>Enter first number: </label>
+            <input type="number" class="val" placeholder="Enter 1st number">
+        </div>
+        <div class="middle">
+            <label>Enter second number: </label>
+            <input type="number" class="val1" placeholder="Enter 2nd number">
+        </div>
+    
+        <div>
+            <label >choose operation : </label>
+            <input list="operations" id="operation" placeholder="Choose operation">
+        <datalist id="operations">
+            <option value="Division">Division</option>
+            <option value="Addition">Addition</option>
+            <option value="Subtraction">Subtraction</option>
+            <option value="Multiplication">Multiplication</option>
+        </datalist>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("operation").addEventListener("change", function() {
+            let domain = this.value;
+            let num1 = parseFloat(document.querySelector(".val").value);
+            let num2 = parseFloat(document.querySelector(".val1").value);
+
+            if (!isNaN(num1) && !isNaN(num2)) {
+                if (domain === "Division") {
+                    console.log("Division: " + (num1 / num2));
+                } else if (domain === "Addition") {
+                    console.log("Addition: " + (num1 + num2));
+                } else if (domain === "Subtraction") {
+                    console.log("Subtraction: " + (num1 - num2));
+                } else if (domain === "Multiplication") {
+                    console.log("Multiplication: " + (num1 * num2));
+                }
+            } else {
+                console.log("Please enter valid numbers.");
+            }
+        });
+    </script>
+</body>
+</html>
